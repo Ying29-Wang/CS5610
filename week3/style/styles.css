@@ -5,3 +5,13 @@ html{
 body{
     font-family: "Roboto", serif
 }
+
+header{
+    text-align: center ;
+}
+
+h1{
+    color: #1050aa; 
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    size: 2.2em;
+} 
