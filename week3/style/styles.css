@@ -36,6 +36,6 @@ h2::first-letter{
     font-size: 3rem;
 }
 
-a[href*="linkedin.com"]::after{
+a[href*="github"]::after{
     content:url("../iamges/WechatIMG228.jpg")
 }
