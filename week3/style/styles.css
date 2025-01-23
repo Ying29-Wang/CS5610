@@ -43,3 +43,11 @@ a[href*="github"]::after{
 header a:last-child{
     margin-left: 20px;
 }
+
+.education.education-list > li:first-child{
+    font-style: italic;
+}
+
+.skills li{
+    list-style-type: none;
+}
