@@ -1,0 +1,53 @@
+html{
+    background-color: rgb(231, 225, 214);
+}
+
+body{
+    font-family: "Roboto", serif
+}
+
+header{
+    text-align: center ;
+    border-bottom: 2px dotted darkslateblue;
+    padding-bottom: 5px;
+}
+
+h1{
+    color: #1050aa; 
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    size: 2.2em;
+} 
+
+#job-title{
+    font-weight: bold;
+}
+
+.experience,
+.education{
+    border: 2px dashed brown;
+    margin: 10px 0;
+}
+
+a[href*="github.com"]:hover{
+    color: crimson
+}
+
+h2::first-letter{
+    font-size: 3rem;
+}
+
+a[href*="github"]::after{
+    content:url("../iamges/WechatIMG228.jpg")
+}
+
+header a:last-child{
+    margin-left: 20px;
+}
+
+.education .education-list > li:first-child{
+    font-style: italic;
+}
+
+.skills li{
+    list-style-type: none;
+}
