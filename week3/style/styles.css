@@ -39,3 +39,7 @@ h2::first-letter{
 a[href*="github"]::after{
     content:url("../iamges/WechatIMG228.jpg")
 }
+
+header a:last-child{
+    margin-left: 20px;
+}
