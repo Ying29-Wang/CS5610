@@ -35,3 +35,7 @@ a[href*="github.com"]:hover{
 h2::first-letter{
     font-size: 3rem;
 }
+
+a[href*="linkedin.com"]::after{
+    content:url("../iamges/WechatIMG228.jpg")
+}
