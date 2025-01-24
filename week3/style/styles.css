@@ -56,6 +56,10 @@ header a:last-child{
     color: darkgreen;
 }
 
+a[href$=".edu"]::before{
+    content: url(../iamges/WechatIMG229.jpg)
+}
+
 .skills ul li:last-child{
     font-size: 1.3rem;
     background-color: rgba(120, 120, 120, 0.2);
