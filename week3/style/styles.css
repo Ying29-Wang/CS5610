@@ -51,3 +51,7 @@ header a:last-child{
 .skills li{
     list-style-type: none;
 }
+
+.experience > ul > li:first-child ~ li{
+    color: darkgreen;
+}
