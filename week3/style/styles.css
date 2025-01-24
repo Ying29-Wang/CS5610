@@ -55,3 +55,8 @@ header a:last-child{
 .experience > ul > li:first-child ~ li{
     color: darkgreen;
 }
+
+.skills ul li:last-child{
+    font-size: 1.3rem;
+    background-color: rgba(120, 120, 120, 0.2);
+}
