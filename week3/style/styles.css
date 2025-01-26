@@ -15,7 +15,7 @@ header{
 h1{
     color: #1050aa; 
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    size: 2.2em;
+    resize: 2.2em;
 } 
 
 #job-title{
