@@ -1,11 +1,19 @@
-iframe {
-    border: none;
-    width: 100%;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; 
+}
+
+main {
+    flex: 1; 
+    padding: 10;
+    margin: 10;
 }
 
 header {
-    background-color: #f8f9fa;
-    padding: 10px 20px;
+    width: 100%;
     text-align: left;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -27,10 +35,11 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: lightslategray;
     color: #fff;
     padding: 10px 20px;
     font-size: 14px;
+    width: 100%; 
 }
 
 footer a {
@@ -55,4 +64,13 @@ footer a:hover {
 .social-icons img {
     width: 20px;
     height: 20px;
+}
+
+body {
+    background-image: url('../images/background.jpg'); /* Specifies the background image */
+    background-size: cover;          /* Ensures the image covers the entire page */
+    background-position: center;     /* Centers the image */
+    background-repeat: no-repeat;    /* Prevents the image from repeating */
+    margin: 0;                       /* Removes default margin */
+    padding: 0;                      /* Removes default padding */
 }
