@@ -1,20 +1,33 @@
+* {
+    box-sizing: border-box; 
+}
+
+/* 
+Make the html and body elements fill the entire window height and set up a flexbox container.
+This ensures the layout adapts vertically and allows the footer to stay at the bottom of the page. 
+*/
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column; 
+    display: flex; /* Set up a flexbox container */
+    flex-direction: column; /* Stack child elements vertically */
 }
 
+/* 
+Main content is set to flex: 1 to grow and take up the remaining space between the header and footer.
+This ensures the footer remains at the bottom, even if there is minimal content.
+*/
 main {
-    flex: 1; 
-    padding: 10;
-    margin: 10;
+    flex: 1; /* Grow and take up remaining space */
+    padding: 10px;
+    margin: 10px;
 }
 
 header {
     width: 100%;
     text-align: left;
+    font-size: larger;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -32,13 +45,13 @@ header nav a:hover {
 
 
 footer {
-    display: flex;
+    display: flex; /* Set up a flexbox container */
     justify-content: space-between;
     align-items: center;
     background-color: lightslategray;
     color: #fff;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 15px;
     width: 100%; 
 }
 
@@ -62,15 +75,15 @@ footer a:hover {
 }
 
 .social-icons img {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 }
 
 body {
-    background-image: url('../images/background.jpg'); /* Specifies the background image */
+    background-image: url('../images/background.jpg'); 
     background-size: cover;          /* Ensures the image covers the entire page */
-    background-position: center;     /* Centers the image */
-    background-repeat: no-repeat;    /* Prevents the image from repeating */
-    margin: 0;                       /* Removes default margin */
-    padding: 0;                      /* Removes default padding */
+    background-position: center;     
+    background-repeat: no-repeat;    
+    margin: 0;                      
+    padding: 0;                      
 }
