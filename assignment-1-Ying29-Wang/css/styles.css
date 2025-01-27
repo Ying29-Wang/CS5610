@@ -12,6 +12,17 @@ html, body {
     padding: 0;
     display: flex; /* Set up a flexbox container */
     flex-direction: column; /* Stack child elements vertically */
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    justify-content: flex-start;
+}
+
+body {
+    background-image: url('../images/background.jpg'); 
+    background-size: cover;          /* Ensures the image covers the entire page */
+    background-position: center;     
+    background-repeat: no-repeat;    
+    min-height: 100vh; /* Set minimum height to 100% of the viewport height */
 }
 
 /* 
@@ -22,13 +33,19 @@ main {
     flex: 1; /* Grow and take up remaining space */
     padding: 10px;
     margin: 10px;
+    width: 80%; /* Set width to 80% of the viewport */
 }
 
 header {
     width: 100%;
     text-align: left;
     font-size: larger;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0;
+}
+
+header nav {
+    background-color: lightgray;  /* Example background color */
+    text-align: center;  /* Centers the text inside the nav */
 }
 
 header nav a {
@@ -40,9 +57,14 @@ header nav a {
 }
 
 header nav a:hover {
-    color: #007bff;
+    color: orange;
 }
 
+figure img {
+    width: 100%;        
+    height: auto;      
+    max-width: 500px; 
+} 
 
 footer {
     display: flex; /* Set up a flexbox container */
@@ -53,6 +75,8 @@ footer {
     padding: 10px 20px;
     font-size: 15px;
     width: 100%; 
+    position: relative;
+    bottom: 0;
 }
 
 footer a {
@@ -62,7 +86,11 @@ footer a {
 }
 
 footer a:hover {
-    color: #f39c12;
+    color: orange;
+}
+
+a:visited {
+    color: blue;  /* Custom color for visited links */
 }
 
 .social-icons {
@@ -79,24 +107,25 @@ footer a:hover {
     height: 25px;
 }
 
-body {
-    background-image: url('../images/background.jpg'); 
-    background-size: cover;          /* Ensures the image covers the entire page */
-    background-position: center;     
-    background-repeat: no-repeat;    
-    margin: 0;                      
-    padding: 0;                      
-}
 
 .education-list li {
-    font-size: 20px; 
+    font-size: 18px; 
     margin: 15px 15px; 
 }
 
 .education-list li img {
-    display: block; /* 让图片独占一行 */
-    width: 100px; /* 调整图片大小 */
-    height: auto; /* 保持图片比例 */
-    margin-bottom: 10px; /* 图片与文字之间的间距 */
-    margin-left: 0; /* 左对齐 */
+    display: block; 
+    width: 100px; 
+    height: auto; 
+    margin-bottom: 10px; 
+    margin-left: 0; 
+}
+
+.hobbies ol {
+    font-size: 18px; 
+    line-height: 1.6; 
+}
+
+.hobbies ol li {
+    margin-bottom: 15px; 
 }
