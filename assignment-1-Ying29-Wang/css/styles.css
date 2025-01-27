@@ -87,3 +87,16 @@ body {
     margin: 0;                      
     padding: 0;                      
 }
+
+.education-list li {
+    font-size: 20px; 
+    margin: 15px 15px; 
+}
+
+.education-list li img {
+    display: block; /* 让图片独占一行 */
+    width: 100px; /* 调整图片大小 */
+    height: auto; /* 保持图片比例 */
+    margin-bottom: 10px; /* 图片与文字之间的间距 */
+    margin-left: 0; /* 左对齐 */
+}
