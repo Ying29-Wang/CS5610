@@ -26,14 +26,19 @@ gap: 2em;
   padding: 0;
   list-style: none;
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px; 
+  background: #fff;
+  border-top: 1px solid #ddd;
 }
 
-.tags > * {
+.tags > li {
   background-color: #999;
   color: #fff;
   padding: 0.2em 0.8em;
   border-radius: 0.2em;
   font-size: 80%;
-  margin: 5px;
+  text-align: center;
+
 }
