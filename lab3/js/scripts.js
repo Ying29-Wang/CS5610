@@ -23,3 +23,21 @@ function calculatePrice(flavor, size, toppings) {
     return prices.sizes[size] * (basePrice + toppingsPrice);
 }
 
+function getOrderDetails() {
+    let flavor = document.getElementById("flavor").value;
+    let size = document.getElementById("size").value;
+    let toppings = Array.from(document.getElementById("topping").selectedOptions).map(option => option.value);
+    
+    console.log("Flavor:", flavor);
+    console.log("Size:", size);
+    console.log("Toppings:", toppings);
+}
+
+// Function to display the order summary
+function displayOrderSummary(order) {
+    console.log(`Order Summary:`);
+    console.log(`Flavor: "${order.flavor}"`);
+    console.log(`Size: "${order.size}"`);
+    console.log(`Toppings: [${order.toppings.length > 0 ? order.toppings.join(", ") : "None"}]`);
+    console.log(`Total Price: $${order.finalPrice.toFixed(2)}`);
+}
