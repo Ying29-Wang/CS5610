@@ -1,3 +1,5 @@
+document.getElementById('placeOrderButton').addEventListener('click', placeOrder);
+
 const prices = {
     flavors: {
         original: 2.5,
@@ -16,21 +18,21 @@ const prices = {
     }
 };
 
-// Function to calculate the price of a bubble tea
+// Function to calculate the price based on selected flavor, size, and toppings
 function calculatePrice(flavor, size, toppings) {
-    let basePrice = prices.flavors[flavor];
-    let toppingsPrice = toppings.reduce((sum, topping) => sum + prices.toppings[topping], 0);
-    return prices.sizes[size] * (basePrice + toppingsPrice);
-}
-
-function getOrderDetails() {
-    let flavor = document.getElementById("flavor").value;
-    let size = document.getElementById("size").value;
-    let toppings = Array.from(document.getElementById("topping").selectedOptions).map(option => option.value);
+    // Get the price for the flavor and size
+    let flavorPrice = prices.flavors[flavor] || 0;
+    let sizePrice = prices.sizes[size] || 0;
     
-    console.log("Flavor:", flavor);
-    console.log("Size:", size);
-    console.log("Toppings:", toppings);
+    // Calculate the total price for the toppings
+    let toppingsPrice = 0;
+    toppings.forEach(topping => {
+        toppingsPrice += prices.toppings[topping] || 0;
+    });
+    
+    // Calculate the final price
+    const totalPrice = sizePrice * (flavorPrice + toppingsPrice);
+    return totalPrice.toFixed(2);  // Return the price with 2 decimal places
 }
 
 // Function to display the order summary
@@ -39,5 +41,5 @@ function displayOrderSummary(order) {
     console.log(`Flavor: "${order.flavor}"`);
     console.log(`Size: "${order.size}"`);
     console.log(`Toppings: [${order.toppings.length > 0 ? order.toppings.join(", ") : "None"}]`);
-    console.log(`Total Price: $${order.finalPrice.toFixed(2)}`);
+    console.log(`Total Price: $${order.finalPrice}`);
 }
