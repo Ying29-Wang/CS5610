@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="flavor">Choose a flavor:</label>
                 <select id="flavor" name="flavor" required>
-                    <option value="">--Please choose an option--</option>
+                    <option value="">--Please choose a flavor--</option>
                     <option value="original">original</option>
                     <option value="mango">mango</option>
                     <option value="strawberry">strawberry</option>
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="size">Choose a size:</label>
                 <select id="size" name="size" required>
-                    <option value="">--Please choose an option--</option>
+                    <option value="">--Please choose a size--</option>
                     <option value="small">small</option>
                     <option value="medium">medium</option>
                     <option value="large">large</option>
@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label for="toppings">Choose toppings:</label>
                 <select id="toppings" name="toppings" multiple>
-                    <option value="">--Please choose an option--</option>
+                    <option value="">--Please choose toppings--</option>
                     <option value="boba">boba</option>
                     <option value="jelly">jelly</option>
                     <option value="pudding">pudding</option>
@@ -42,6 +42,10 @@
             </div>
             <button type="button" id="placeOrderButton">Place Order</button>
         </form>
+        <div id="orderSummary">
+            <h2>Order Summary</h2>
+            <p id="flavorSummary"></p>
+        </div>
     </main>
 </body>
 
