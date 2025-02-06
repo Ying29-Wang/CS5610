@@ -41,16 +41,34 @@ function calculateArea() {
 // }
 // changeListMarker();
 
-// const btn = document.querySelector('#updateImage');
-// function changeButtonText() {
-//     if (btn.innerText === 'clicked') {
-//         btn.innerText = 'click me';
-//     }
-//     else {
-//         btn.innerText = 'clicked';
-//     }
-// }
-// //btn.addEventListener('click', changeButtonText);
-// btn.addEventListener('click', changeButtonText, {once: true});
+
+const btn = document.querySelector('#updateImage');
+btnText = localStorage.getItem('buttonText');
+if (btnText) {
+    btn.innerText = btnText;
+}
+
+function changeButtonText() {
+    if (btn.innerText === 'clicked') {
+        btn.innerText = 'click me';
+    }
+    else {
+        btn.innerText = 'clicked';
+    }
+    localStorage.setItem('buttonText', btn.innerText);
+}
+btn.addEventListener('click', changeButtonText);
+btn.addEventListener('click', changeButtonText, {once: true});
 
 
+const buttonContainer = document.querySelector('.buttonContainer');
+
+function changeButtonBGColor(event) {
+    if (event.target.nodeName !== 'BUTTON') {
+        return;
+    }
+    console.log(event.target.innerText);
+    event.target.style.backgroundColor = 'red';
+}
+
+buttonContainer.addEventListener('mouseover', changeButtonBGColor);
