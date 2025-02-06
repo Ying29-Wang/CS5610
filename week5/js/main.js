@@ -1,4 +1,4 @@
-const radiusP = document.querySelector('.radius');
+const radiusP = document.querySelector('#radius');
 const resultP = document.querySelector('#result');
 
 function getNumber() {
