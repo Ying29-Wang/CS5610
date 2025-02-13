@@ -36,23 +36,47 @@ function calculatePrice(flavor, size, toppings = []) {
 
 // Function to display the order summary
 function displayOrderSummary(order) {
-    console.log(`You have ordered:`);
-    console.log(`flavor: "${order.flavor}"`);
-    console.log(`size: "${order.size}"`);
-    console.log(`toppings: [${order.toppings.length > 0 ? order.toppings.join(", ") : "None"}]`);
-    console.log(`Total Price: $${order.finalPrice}`);
+    let orderSummary = `You have ordered a ${order.size} ${order.flavor} Boba tea`;
+    if (toppings.length > 0) {
+        orderSummary += ` with toppings: ${order.toppings.join(", ")}. `;
+    } else {
+        orderSummary += " with no toppings. ";
+    }
+    orderSummary += `The total price is $${order.finalPrice}.`;
+    document.querySelector("#orderDetail").textContent = orderSummary;
 }
 
-function placeOrder(flavor, size, toppings = []) {
-
-    let order = {
-        flavor:flavor, 
-        size:size, 
-        toppings:toppings, 
-        finalPrice:calculatePrice(flavor, size, toppings)
+function placeOrder() {
+    const flavor = document.querySelector("#flavor").value;
+    const size = document.querySelector("#size").value;
+    const selectedToppings = document.querySelector("#toppings"); 
+    const toppings = Array.from(selectedToppings.selectedOptions).map(option => option.value);
+    
+    console.log(flavor, size, toppings);
+    if (invalidOrder(flavor, size)) {
+        return;
     }
+
+    const order = {
+        flavor: flavor,
+        size: size,
+        toppings: toppings,
+        finalPrice: calculatePrice(flavor, size, toppings)
+    }
+
     displayOrderSummary(order)
 }
 
-placeOrder("original", "small", ["boba", "jelly"]);
-placeOrder("mango", "medium", ["pudding"]);
+// placeOrder("original", "small", ["boba", "jelly"]);
+// placeOrder("mango", "medium", ["pudding"]);
+
+function invalidOrder(flavor, size) {
+    if (!flavor || !size) {
+        alert("Please select a flavor and size");
+        return true;
+    }
+    return false;
+}
+
+const placeOrderButton = document.querySelector("#placeOrderButton");
+placeOrderButton.addEventListener("click", placeOrder); 
