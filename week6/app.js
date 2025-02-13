@@ -6,14 +6,14 @@ fs.writeFile('data.txt', 'Hello, Ying!', (err) => {
         console.log('write fail');
     }else{
         console.log('write success');
+        fs.readFile('data.txt', 'utf8', (err, data) => {
+            if(err){
+                console.log('read fail');
+            }
+            else{
+                console.log(data);
+            }
+        });
     }
 });
 
-fs.readFile('data.txt', 'utf8', (err, data) => {
-    if(err){
-        console.log('read fail');
-    }
-    else{
-        console.log(data);
-    }
-});
