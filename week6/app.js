@@ -17,7 +17,25 @@
 //     }
 // });
 
-const logger = require("./logger.js");
-console.log(logger);
-logger.log();
-console.log(logger.version);
+// const logger = require("./logger.js");
+// console.log(logger);
+// logger.log();
+// console.log(logger.version);
+
+const express = require('express');
+console.log(express);
+const app = express();
+console.log(app);
+
+app.get('/', (req, res) => {
+    res.send("Hello, Welcome to Ying's website!");
+    console.log('req');
+});
+const port = 3000;
+
+app.listen(port, function (err) {
+    if (err) {
+        console.log('error in running server');
+    }
+    console.log('server is running on port', port);
+});
