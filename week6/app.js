@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
     res.send("Hello, Welcome to Ying's website!");
     console.log('req');
 });
+a
+app.get('/tasks/', (req, res) => {
+    res.send('<h1>List of tasks</h1>');
+});
 const port = 3000;
 
 app.listen(port, function (err) {
