@@ -25,24 +25,26 @@
 const express = require('express');
 console.log(express);
 const app = express();
+const tasksRouter = require('./routes/tasks.js');
 app.use(express.static('public'));
 console.log(app);
 
+app.use("/tasks", tasksRouter);
 app.get('/', (req, res) => {
     res.send("Hello, Welcome to Ying's website!");
     console.log('req');
 });
 
-app.get('/tasks/', (req, res) => {
-    res.send('<h1>List of tasks</h1>');
-    console.log(req.params);
-    console.log(req.query);
-});
+// app.get('/tasks/', (req, res) => {
+//     res.send('<h1>List of tasks</h1>');
+//     console.log(req.params);
+//     console.log(req.query);
+// });
 
-app.get('/tasks/:id', (req, res) => {
-    console.log(req.params.id);
-    res.send(`<p>You are viewing Task ${req.params.id}</p>`);
-});
+// app.get('/tasks/:id', (req, res) => {
+//     console.log(req.params.id);
+//     res.send(`<p>You are viewing Task ${req.params.id}</p>`);
+// });
 
 
 const port = 3000;
