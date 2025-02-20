@@ -25,6 +25,7 @@
 const express = require('express');
 console.log(express);
 const app = express();
+app.use(express.static('public'));
 console.log(app);
 
 app.get('/', (req, res) => {
