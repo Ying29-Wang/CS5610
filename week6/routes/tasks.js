@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
-
+const axios = require('axios');
 
 router.get('/', (req, res) => {
-    res.send('<h1>List of tasks</h1>');
-    console.log(req.params);
-    console.log(req.query);
+    const promise = axios.get("https://jsonplaceholder.typicode.com/todos/");
+    console.log(promise);
+    promise.then((response) => {
+        console.log(response.data);
+    });
+    res.json({message: 'List of tasks'});
+    // res.send('<h1>List of tasks</h1>');
 });
 
 router.get('/:id', (req, res) => {
