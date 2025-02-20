@@ -7,8 +7,10 @@ router.get('/', (req, res) => {
     console.log(promise);
     promise.then((response) => {
         console.log(response.data);
+    }).catch((err) => {
+        console.log(err.mesaage);
     });
-    res.json({message: 'List of tasks'});
+    // res.json({message: 'List of tasks'});
     // res.send('<h1>List of tasks</h1>');
 });
 
