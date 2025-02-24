@@ -22,16 +22,23 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try{
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/todos/${req.params.id}`);
+        const [taskResponse, userResponse] = await Promise.all([
+            axios.get(`https://jsonplaceholder.typicode.com/todos/${req.params.id}`),
+            axios.get(`https://jsonplaceholder.typicode.com/users/${req.params.id}`)
+            ]);
+
+        const task = taskResponse.data;
+        const user = userResponse.data;
+
         res.render('task', {
-            id: response.data.taskId,
-            title: response.data.title, 
-            completed: response.data.completed});
+            id: task.id,
+            title: task.title, 
+            completed: task.completed,
+            name: user.name
+        });
     } catch(err){
         console.log(err.message);
     }
-    
-
     // res.send(`<p>You are viewing Task ${req.params.id}</p>`);
     // res.render('task', { id: req.params.id });
 });

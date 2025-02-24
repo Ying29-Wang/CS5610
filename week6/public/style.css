@@ -1,0 +1,11 @@
+body {
+    background-color: pink; /* Light blue background */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Center align the first heading */
+  h1 {
+    text-align: center;
+    color: #333;
+  }
