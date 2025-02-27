@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { addToDB } = require('../db');
+const { addToDB, findAll, findById } = require('../db');
+const { ObjectId } = require('mongodb');
 
 router.post("/", async (req, res) => {
     try{
@@ -21,10 +22,13 @@ router.get('/add', (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const promise = await axios.get("https://jsonplaceholder.typicode.com/todos/");
-        res.json(promise.data);
+        // const promise = await axios.get("https://jsonplaceholder.typicode.com/todos/");
+        // res.json(promise.data);
+        const tasks = await findAll();
+        res.render('tasks', {tasks: tasks});
     } catch (err) {
         console.log(err.message);
+        res.status(500).send("Internal server error");
     }
     // const promise = axios.get("https://jsonplaceholder.typicode.com/todos/");
     // console.log(promise);
@@ -39,22 +43,29 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try{
-        const [taskResponse, userResponse] = await Promise.all([
-            axios.get(`https://jsonplaceholder.typicode.com/todos/${req.params.id}`),
-            axios.get(`https://jsonplaceholder.typicode.com/users/${req.params.id}`)
-            ]);
+        // const [taskResponse, userResponse] = await Promise.all([
+        //     axios.get(`https://jsonplaceholder.typicode.com/todos/${req.params.id}`),
+        //     axios.get(`https://jsonplaceholder.typicode.com/users/${req.params.id}`)
+        //     ]);
 
-        const task = taskResponse.data;
-        const user = userResponse.data;
+        const task = await findById(req.params.id);
+        if(!task){
+            res.status(404).send("Task not found");
+            return;
+        }
+
+        // const task = taskResponse.data;
+        // const user = userResponse.data;
 
         res.render('task', {
-            id: task.id,
+            id: task._id,
             title: task.title, 
             completed: task.completed,
-            name: user.name
+            name: task.username
         });
     } catch(err){
         console.log(err.message);
+        res.status(500).send("Internal server error");
     }
     // res.send(`<p>You are viewing Task ${req.params.id}</p>`);
     // res.render('task', { id: req.params.id });
