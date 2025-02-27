@@ -22,6 +22,11 @@
 // logger.log();
 // console.log(logger.version);
 
+const db = require('./db');
+require("dotenv").config();
+console.log(process.env);
+
+
 const express = require('express');
 console.log(express);
 const app = express();
@@ -51,9 +56,13 @@ app.get('/', (req, res) => {
 
 const port = 3000;
 
-app.listen(port, function (err) {
-    if (err) {
-        console.log('error in running server');
-    }
-    console.log('server is running on port', port);
+app.listen(port, async function (err) {
+    // if (err) {
+    //     console.log('error in running server');
+    // }
+    // console.log('server is running on port', port);
+    await db.connect();
+    db.addToDB({task: "Task 1", description: "Description 1"});
+
+
 });
