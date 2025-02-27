@@ -7,12 +7,18 @@ router.post("/", async (req, res) => {
     try{
         console.log("req.body", req.body);
         await addToDB(req.body);
-        res.send("Task added");
+        // res.send("Task added");
+        res.redirect("/tasks");
     }catch(err){
         console.log(err.message);
         res.status(500).send("Internal server error");
     }    
 });
+
+router.get('/add', (req, res) => {
+    res.render('taskForm');
+});
+
 router.get('/', async (req, res) => {
     try {
         const promise = await axios.get("https://jsonplaceholder.typicode.com/todos/");
