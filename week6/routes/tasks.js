@@ -1,6 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const { addToDB } = require('../db');
+
+router.post("/", async (req, res) => {
+    try{
+        console.log("req.body", req.body);
+        await addToDB(req.body);
+        // res.send("Task added");
+        res.redirect("/tasks");
+    }catch(err){
+        console.log(err.message);
+        res.status(500).send("Internal server error");
+    }    
+});
+
+router.get('/add', (req, res) => {
+    res.render('taskForm');
+});
 
 router.get('/', async (req, res) => {
     try {
