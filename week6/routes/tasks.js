@@ -1,7 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const { addToDB } = require('../db');
 
+router.post("/", async (req, res) => {
+    try{
+        console.log("req.body", req.body);
+        await addToDB(req.body);
+        res.send("Task added");
+    }catch(err){
+        console.log(err.message);
+        res.status(500).send("Internal server error");
+    }    
+});
 router.get('/', async (req, res) => {
     try {
         const promise = await axios.get("https://jsonplaceholder.typicode.com/todos/");

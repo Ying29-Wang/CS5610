@@ -34,6 +34,10 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 const tasksRouter = require('./routes/tasks.js');
 app.use(express.static('public'));
+
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
+
 console.log(app);
 
 app.use("/tasks", tasksRouter);
