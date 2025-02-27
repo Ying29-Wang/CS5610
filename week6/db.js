@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb');
-const url = "mongodb+srv://webDevelopment:webDevelopment@cluster0.v6zmb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+require("dotenv").config();
+const url = process.env.MONGODB_URL;
 
 const client = new MongoClient(url);
 module.exports = {
@@ -9,6 +10,7 @@ module.exports = {
     addToDB: async function (doc) {
         try{
             const result = await client.db("cs5610").collection("tasks").insertOne(doc);
+            console.log(`New listing created with the following id: ${result.insertedId}`);
         }catch(e){
             console.error(e);
         }
