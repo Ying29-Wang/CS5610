@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { addToDB, findAll, findById } = require('../db');
+const { addToDB, findAll, findById, findOne } = require('../db');
 const { ObjectId } = require('mongodb');
 
 router.post("/", async (req, res) => {
@@ -47,8 +47,11 @@ router.get('/:id', async (req, res) => {
         //     axios.get(`https://jsonplaceholder.typicode.com/todos/${req.params.id}`),
         //     axios.get(`https://jsonplaceholder.typicode.com/users/${req.params.id}`)
         //     ]);
+        const query = { _id: new ObjectId(req.params.id) };
 
-        const task = await findById(req.params.id);
+        const task = await findOne(query);
+       
+       
         if(!task){
             res.status(404).send("Task not found");
             return;
@@ -61,7 +64,8 @@ router.get('/:id', async (req, res) => {
             id: task._id,
             title: task.title, 
             completed: task.completed,
-            name: task.username
+            name: task.username,
+            date: task.date
         });
     } catch(err){
         console.log(err.message);
@@ -69,6 +73,21 @@ router.get('/:id', async (req, res) => {
     }
     // res.send(`<p>You are viewing Task ${req.params.id}</p>`);
     // res.render('task', { id: req.params.id });
+});
+
+router.get('/test/findOne', async (req, res) => {
+    try{
+        const query = { title: "Ying" };
+        const task = await findOne(query);
+        console.log(task);
+        res.json({
+            message: "Task found",
+            rusult: task
+        });
+    }catch(err){
+        console.log(err.message);
+        res.status(500).send("Internal server error");
+    }
 });
 
 module.exports = router;

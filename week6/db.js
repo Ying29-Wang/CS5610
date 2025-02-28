@@ -34,5 +34,23 @@ module.exports = {
             console.error(e);
             return {};
         }
+    },
+    findOne: async function (query) {
+        try{
+            const result = await client.db("cs5610").collection("tasks").findOne(query);
+            return result;
+        }catch(e){
+            console.error(e);
+            return {};
+        }
     }
 }
+
+const { findOne } = require('./db');
+const { ObjectId } = require('mongodb');
+
+async function main() {
+
+}
+
+main().catch(console.error); // Call the main function
