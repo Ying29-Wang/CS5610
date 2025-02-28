@@ -66,7 +66,7 @@ app.listen(port, async function (err) {
     // }
     // console.log('server is running on port', port);
     await db.connect();
-    db.addToDB({task: "Task 1", description: "Description 1"});
+    // db.addToDB({task: "Task 1", description: "Description 1"});
 
 
 });
