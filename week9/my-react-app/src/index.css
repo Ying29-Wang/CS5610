@@ -9,3 +9,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+.taskContainer {
+  background-color: lightblue;
+  padding: 1em;
+  margin: 1em;
+}
