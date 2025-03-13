@@ -3,7 +3,7 @@ import Header from './components/Header';
 
 export default function App() {
   const appName = "My Awesome App"
-  return <div>
+  return <div className="appContainer">
     <Header myAppName={appName} />
   </div>;
 }
