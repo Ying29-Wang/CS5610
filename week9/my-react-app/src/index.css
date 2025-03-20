@@ -16,10 +16,11 @@
   margin: 1em;
 }
 
-.taskTitleStauts {
+.taskTitleStatus {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .form-control {
