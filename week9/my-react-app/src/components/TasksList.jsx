@@ -30,13 +30,13 @@ export default function TasksList() {
     return tasks.length === 0 ? (
         <p>No tasks to show</p>
     ) : (
-        <> Tasks List
-            <ul>
-                {tasks.map((task) => {
-                    return <Task key={task.id} taskObj={task} onDelete={deleteTask} />;
-                })}
-            </ul>
+        // <> Tasks List
+        <ul>
+            {tasks.map((task) => {
+                return <Task key={task.id} taskObj={task} onDelete={deleteTask} />;
+            })}
+        </ul>
 
-        </>
+        // </>
     )
 }

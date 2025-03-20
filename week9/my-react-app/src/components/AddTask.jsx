@@ -4,8 +4,19 @@ import Task from "./Task";
 export default function AddTask() {
     const[title, setTitle] = useState("");
     const[date, setDate] = useState("");
+    function submitHanlder(e) {
+        e.preventDefault();
+        const newTask = {
+            id: Math.floor(Math.random() * 10000),
+            title: title,
+            date: date,
+        };
+        console.log(newTask);  
+        setDate("");
+        setTitle("");   
+    }
     return (
-        <form>
+        <form onSubmit={submitHanlder}>
             <div className="form-control">
                 <label>Title</label>
                 <input
