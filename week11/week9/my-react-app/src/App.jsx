@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import TasksList from './components/TasksList';
 import AddTask from './components/AddTask';
+import TaskDetail from './components/TaskDetail';
 import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
 
 export default function App() {
@@ -44,9 +45,9 @@ export default function App() {
         <Route path="/" element={<Header myAppName={appName} />} />
         <Route
           path="/tasks"
-          element={<TasksList tasks={tasksFromServer} isLoading={isLoading} />}
+          element={<TasksList tasks={tasksFromServer} isLoading={isLoading} onTaskDeleted={fetchData} />}
         >
-          <Route path="/tasks/:taskId" element={<h1>Task Details</h1>} />
+          <Route path="/tasks/:taskId" element={<TaskDetail tasks={tasksFromServer} />} />
         </Route>
         <Route path="/add" element={<AddTask onTaskAdded={fetchData} />} />
         <Route

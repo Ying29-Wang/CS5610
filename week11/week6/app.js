@@ -22,7 +22,7 @@
 // logger.log();
 // console.log(logger.version);
 
-const db = require('./db');
+const db = require('./db.js');
 require("dotenv").config();
 console.log(process.env);
 
@@ -35,12 +35,15 @@ app.set('views', './views');
 const tasksRouter = require('./routes/tasks.js');
 app.use(express.static('public'));
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
 
 console.log(app);
 
-app.use("/tasks", tasksRouter);
+app.use("/api/tasks", tasksRouter);
 app.get('/', (req, res) => {
     res.send("Hello, Welcome to Ying's website!");
     console.log('req');

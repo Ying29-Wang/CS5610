@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Task from "./Task";
 import { Outlet } from "react-router-dom";
 
-export default function TasksList({ tasks }) {
+export default function TasksList({ tasks, onTaskDeleted }) {
     const [isLoading, setIsLoading] = useState(false);
     // const [tasks, setTasks] = useState([]);
 
@@ -12,16 +12,32 @@ export default function TasksList({ tasks }) {
         // const newArray = tasks.filter((task) => task.id !== deletedId);
         // setTasks(newArray);
         try {
-            // 1. delete from the server
-            await fetch(`http://localhost:5001/tasks/${deletedId}`, {
-                method: "DELETE",
+            setIsLoading(true);
+            // First check if the task exists
+            const checkResponse = await fetch(`http://localhost:5001/tasks/${deletedId}`);
+            if (!checkResponse.ok) {
+                throw new Error(`Task not found: ${checkResponse.status}`);
+            }
+
+            // Then delete the task
+            const deleteResponse = await fetch(`http://localhost:5001/tasks/${deletedId}`, {
+                method: "DELETE"
             });
-            // Refresh the page to update the task list
-            window.location.reload();
+            
+            if (!deleteResponse.ok) {
+                throw new Error(`Failed to delete task: ${deleteResponse.status}`);
+            }
+            
+            // Call the parent's refresh function
+            if (onTaskDeleted) {
+                onTaskDeleted();
+            }
         } catch (error) {
-            console.log(error);
+            console.error("Error deleting task:", error);
+            alert(`Failed to delete task: ${error.message}`);
+        } finally {
+            setIsLoading(false);
         }
-        console.log("task deleted");
     }
 
     return (

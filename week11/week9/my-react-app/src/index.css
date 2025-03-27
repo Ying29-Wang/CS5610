@@ -31,6 +31,29 @@ nav a.active {
   color: #007bff;
 }
 
+.task-detail {
+  padding: 20px;
+  margin: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.task-detail h2 {
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.task-detail h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.task-detail p {
+  color: #666;
+  margin: 5px 0;
+}
+
 .headerContainer{
   display: flex;
   justify-content: space-between;

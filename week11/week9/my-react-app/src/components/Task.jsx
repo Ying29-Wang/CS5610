@@ -4,8 +4,9 @@ import { NavLink } from "react-router-dom";
 
 export default function Task({ taskObj, onDelete }) {
     function deletePressed() {
-        // console.log("delete pressed");
-        onDelete(taskObj.id)
+        console.log("Delete pressed for task:", taskObj);
+        console.log("Task ID:", taskObj.id);
+        onDelete(taskObj.id.toString());
     }
     return (
         <li>
