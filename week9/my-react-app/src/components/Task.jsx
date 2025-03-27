@@ -10,7 +10,7 @@ export default function Task({ taskObj, onDelete }) {
         <li>
             <div className="taskContainer">
                 <div className="taskTitleStatus">
-                    <p>{taskObj.title}</p>
+                    <NavLink to='/tasks/${taskObj.title}'> </NavLink>
                     <IoTrashSharp onClick={deletePressed}/>
                 </div>
                 <p>{taskObj.date}</p>
