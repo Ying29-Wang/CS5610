@@ -14,13 +14,13 @@ export default function TasksList({ tasks, onTaskDeleted }) {
         try {
             setIsLoading(true);
             // First check if the task exists
-            const checkResponse = await fetch(`http://localhost:3000/tasks/${deletedId}`);
+            const checkResponse = await fetch(`http://localhost:5001/tasks/${deletedId}`);
             if (!checkResponse.ok) {
                 throw new Error(`Task not found: ${checkResponse.status}`);
             }
 
             // Then delete the task
-            const deleteResponse = await fetch(`http://localhost:3000/tasks/${deletedId}`, {
+            const deleteResponse = await fetch(`http://localhost:5001/tasks/${deletedId}`, {
                 method: "DELETE"
             });
             
@@ -51,7 +51,7 @@ export default function TasksList({ tasks, onTaskDeleted }) {
                 // <> Tasks List
                 <ul>
                     {tasks.map((task) => {
-                        return <Task key={task.id} taskObj={task} onDelete={deleteTask} />;
+                        return <Task key={task.id.toString()} taskObj={task} onDelete={deleteTask} />;
                     })}
                 </ul>
 

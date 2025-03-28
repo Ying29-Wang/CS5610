@@ -1,0 +1,82 @@
+.appContainer {
+  border: darkblue 1px solid;
+  padding: 1em;
+  margin: 1em;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+nav a:hover {
+  background-color: #f0f0f0;
+}
+
+nav a.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.active-task {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.task-detail {
+  padding: 20px;
+  margin: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.task-detail h2 {
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.task-detail h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.task-detail p {
+  color: #666;
+  margin: 5px 0;
+}
+
+.headerContainer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskContainer {
+  background-color: lightblue;
+  padding: 1em;
+  margin: 1em;
+}
+
+.taskTitleStatus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.form-control {
+  margin: 20px 0;
+  display:flex;
+}
+
+.form-control label {
+  margin-right: 10px;
+}

@@ -10,7 +10,6 @@ export default function AddTask({ onTaskAdded }) {
     async function submitHanlder(e) {
         e.preventDefault();
         const newTask = {
-            id: Date.now(),
             title: title,
             date: date
         };
@@ -18,12 +17,12 @@ export default function AddTask({ onTaskAdded }) {
 
         try {
             // First check if server is available
-            const serverCheck = await fetch("http://localhost:3000/tasks");
+            const serverCheck = await fetch("http://localhost:5001/tasks");
             if (!serverCheck.ok) {
                 throw new Error("Server is not available");
             }
 
-            const response = await fetch("http://localhost:3000/tasks", {
+            const response = await fetch("http://localhost:5001/tasks", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -76,4 +75,4 @@ export default function AddTask({ onTaskAdded }) {
             </form>
         </div>
     );
-}
+} 

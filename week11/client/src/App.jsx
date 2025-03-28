@@ -13,7 +13,7 @@ export default function App() {
   async function fetchData() {
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:3000/tasks");
+      const response = await fetch("http://localhost:5001/tasks");
       if (!response.ok) {
         throw new Error("Failed to fetch tasks");
       }
@@ -57,4 +57,4 @@ export default function App() {
       </Routes>
     </div>
   )
-}
+} 
