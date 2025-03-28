@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { addToDB, findAll, findById, findOne } = require('../db');
+const { addToDB, findAll, findById, findOne, deleteTask } = require('../db');
 const { ObjectId } = require('mongodb');
 
 router.post("/", async (req, res) => {
@@ -9,23 +9,23 @@ router.post("/", async (req, res) => {
         console.log("req.body", req.body);
         await addToDB(req.body);
         // res.send("Task added");
-        res.redirect("/tasks");
+        res.status(201).json({ message: "Task added successfully" });
     }catch(err){
         console.log(err.message);
         res.status(500).send("Internal server error");
     }    
 });
 
-router.get('/add', (req, res) => {
-    res.render('taskForm');
-});
+// router.get('/add', (req, res) => {
+//     res.render('taskForm');
+// });
 
 router.get('/', async (req, res) => {
     try {
         // const promise = await axios.get("https://jsonplaceholder.typicode.com/todos/");
         // res.json(promise.data);
         const tasks = await findAll();
-        res.render('tasks', {tasks: tasks});
+        res.json(tasks);
     } catch (err) {
         console.log(err.message);
         res.status(500).send("Internal server error");
@@ -60,13 +60,14 @@ router.get('/:id', async (req, res) => {
         // const task = taskResponse.data;
         // const user = userResponse.data;
 
-        res.render('task', {
-            id: task._id,
-            title: task.title, 
-            completed: task.completed,
-            name: task.username,
-            date: task.date
-        });
+        // res.render('task', {
+        //     id: task._id,
+        //     title: task.title, 
+        //     completed: task.completed,
+        //     name: task.username,
+        //     date: task.date
+        // });
+        res.json(task);
     } catch(err){
         console.log(err.message);
         res.status(500).send("Internal server error");
@@ -87,6 +88,29 @@ router.get('/test/findOne', async (req, res) => {
     }catch(err){
         console.log(err.message);
         res.status(500).send("Internal server error");
+    }
+});
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        console.log("Attempting to delete task with ID:", taskId);
+        
+        // Use your existing deleteTask function from db.js
+        // If you've imported it at the top of the file
+        const filter = { _id: new ObjectId(taskId) };
+        const result = await deleteTask(filter);
+        
+        console.log("Delete result:", result);
+        
+        if (!result || !result.deletedCount || result.deletedCount === 0) {
+            return res.status(404).json({ error: "Task not found or already deleted" });
+        }
+        
+        res.json({ message: "Task deleted successfully" });
+    } catch (err) {
+        console.error("Error deleting task:", err);
+        res.status(500).json({ error: "Internal server error" });
     }
 });
 

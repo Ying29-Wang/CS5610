@@ -14,20 +14,20 @@ export default function TasksList({ tasks, onTaskDeleted }) {
         try {
             setIsLoading(true);
             // First check if the task exists
-            const checkResponse = await fetch(`http://localhost:3000/tasks/${deletedId}`);
+            const checkResponse = await fetch(`http://localhost:3000/api/tasks/${deletedId}`);
             if (!checkResponse.ok) {
                 throw new Error(`Task not found: ${checkResponse.status}`);
             }
 
             // Then delete the task
-            const deleteResponse = await fetch(`http://localhost:3000/tasks/${deletedId}`, {
+            const deleteResponse = await fetch(`http://localhost:3000/api/tasks/${deletedId}`, {
                 method: "DELETE"
             });
-            
+
             if (!deleteResponse.ok) {
                 throw new Error(`Failed to delete task: ${deleteResponse.status}`);
             }
-            
+
             // Call the parent's refresh function
             if (onTaskDeleted) {
                 onTaskDeleted();
@@ -51,7 +51,8 @@ export default function TasksList({ tasks, onTaskDeleted }) {
                 // <> Tasks List
                 <ul>
                     {tasks.map((task) => {
-                        return <Task key={task.id} taskObj={task} onDelete={deleteTask} />;
+                        const taskId = task._id || task.id; // Handle both ID formats
+                        return <Task key={taskId.toString()} taskObj={task} onDelete={deleteTask} />;
                     })}
                 </ul>
 

@@ -1,6 +1,6 @@
 const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config();
-const url = process.env.MONGODB_URL;
+const url = process.env.MONGODB_URL || "mongodb://localhost:27017/taskdb";
 
 const client = new MongoClient(url);
 
@@ -24,9 +24,15 @@ async function addTask(task) {
 }
 
 async function deleteTask(filter) {
-    const db = await connectToDb();
-    const result = await db.collection("tasks").deleteOne(filter);
-    return result;
+    try {
+        const db = await connectToDb();
+        const result = await db.collection("tasks").deleteOne(filter);
+        console.log(`Deleted ${result.deletedCount} document(s)`);
+        return result;
+    } catch (error) {
+        console.error("Error deleting task:", error);
+        throw error;
+    }
 }
 
 module.exports = {
