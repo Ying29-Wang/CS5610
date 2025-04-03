@@ -4,6 +4,12 @@ import TasksList from './components/TasksList';
 import AddTask from './components/AddTask';
 import TaskDetail from './components/TaskDetail';
 import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
+// import LoginButton from './components/LoginButton';
+// import LogoutButton from './components/AuthenticationButton';
+import { useAuth0 } from '@auth0/auth0-react';
+import AuthenticationButton from './components/AuthenticationButton';
+import Profile from './components/Profile';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   const [tasksFromServer, setTasksFromServer] = useState([]);
@@ -30,14 +36,14 @@ export default function App() {
       try {
         const data = JSON.parse(rawText);
         console.log("Parsed data:", data);
-        
+
         // Check if data is an array
         if (!Array.isArray(data)) {
           console.error("Expected array but got:", typeof data);
           setTasksFromServer([]);
           return;
         }
-        
+
         // Log the structure of the first task if available
         if (data.length > 0) {
           console.log("First task structure:", data[0]);
@@ -45,7 +51,7 @@ export default function App() {
         } else {
           console.log("No tasks returned from server");
         }
-        
+
         setTasksFromServer(data);
       } catch (parseError) {
         console.error("JSON parsing error:", parseError);
@@ -66,12 +72,19 @@ export default function App() {
   const appName = "My Awesome App"
 
   return (
+    isLoading ? <div>Loading...</div> :
     <div className="appContainer">
-      <nav>
-        <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
-        <NavLink to="/tasks" className={({ isActive }) => isActive ? 'active' : ''}>Tasks</NavLink>
-        <NavLink to="/add" className={({ isActive }) => isActive ? 'active' : ''}>Add Task</NavLink>
-      </nav>
+      <div className="navContainer">
+        <nav>
+          <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
+          <NavLink to="/tasks" className={({ isActive }) => isActive ? 'active' : ''}>Tasks</NavLink>
+          <NavLink to="/add" className={({ isActive }) => isActive ? 'active' : ''}>Add Task</NavLink>
+          <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : ''}>Profile</NavLink>
+        </nav>
+        <div className="authButtons">
+          <AuthenticationButton />
+        </div>
+      </div>
       <Routes>
         <Route path="/" element={<Header myAppName={appName} />} />
         <Route
@@ -81,10 +94,8 @@ export default function App() {
           <Route path="/tasks/:taskId" element={<TaskDetail tasks={tasksFromServer} />} />
         </Route>
         <Route path="/add" element={<AddTask onTaskAdded={fetchData} />} />
-        <Route
-          path="*"
-          element={<h1>404 Not Found</h1>}
-        />
+        <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </div>
   )
