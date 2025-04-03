@@ -26,6 +26,12 @@ nav a.active {
   color: white;
 }
 
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .active-task {
   font-weight: bold;
   color: #007bff;

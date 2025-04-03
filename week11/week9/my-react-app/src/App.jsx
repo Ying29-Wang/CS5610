@@ -4,6 +4,7 @@ import TasksList from './components/TasksList';
 import AddTask from './components/AddTask';
 import TaskDetail from './components/TaskDetail';
 import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
+import LoginButton from './components/LoginButton';
 
 export default function App() {
   const [tasksFromServer, setTasksFromServer] = useState([]);
@@ -30,14 +31,14 @@ export default function App() {
       try {
         const data = JSON.parse(rawText);
         console.log("Parsed data:", data);
-        
+
         // Check if data is an array
         if (!Array.isArray(data)) {
           console.error("Expected array but got:", typeof data);
           setTasksFromServer([]);
           return;
         }
-        
+
         // Log the structure of the first task if available
         if (data.length > 0) {
           console.log("First task structure:", data[0]);
@@ -45,7 +46,7 @@ export default function App() {
         } else {
           console.log("No tasks returned from server");
         }
-        
+
         setTasksFromServer(data);
       } catch (parseError) {
         console.error("JSON parsing error:", parseError);
@@ -67,11 +68,14 @@ export default function App() {
 
   return (
     <div className="appContainer">
-      <nav>
-        <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
-        <NavLink to="/tasks" className={({ isActive }) => isActive ? 'active' : ''}>Tasks</NavLink>
-        <NavLink to="/add" className={({ isActive }) => isActive ? 'active' : ''}>Add Task</NavLink>
-      </nav>
+      <div className="navContainer">
+        <nav>
+          <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
+          <NavLink to="/tasks" className={({ isActive }) => isActive ? 'active' : ''}>Tasks</NavLink>
+          <NavLink to="/add" className={({ isActive }) => isActive ? 'active' : ''}>Add Task</NavLink>
+        </nav>
+        <LoginButton />
+      </div>
       <Routes>
         <Route path="/" element={<Header myAppName={appName} />} />
         <Route
