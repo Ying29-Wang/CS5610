@@ -4,8 +4,12 @@ import TasksList from './components/TasksList';
 import AddTask from './components/AddTask';
 import TaskDetail from './components/TaskDetail';
 import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
-import LoginButton from './components/LoginButton';
-import LogoutButton from './components/LogoutButton';
+// import LoginButton from './components/LoginButton';
+// import LogoutButton from './components/AuthenticationButton';
+import { useAuth0 } from '@auth0/auth0-react';
+import AuthenticationButton from './components/AuthenticationButton';
+import Profile from './components/Profile';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   const [tasksFromServer, setTasksFromServer] = useState([]);
@@ -68,16 +72,17 @@ export default function App() {
   const appName = "My Awesome App"
 
   return (
+    isLoading ? <div>Loading...</div> :
     <div className="appContainer">
       <div className="navContainer">
         <nav>
           <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
           <NavLink to="/tasks" className={({ isActive }) => isActive ? 'active' : ''}>Tasks</NavLink>
           <NavLink to="/add" className={({ isActive }) => isActive ? 'active' : ''}>Add Task</NavLink>
+          <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : ''}>Profile</NavLink>
         </nav>
         <div className="authButtons">
-          <LoginButton />
-          <LogoutButton />
+          <AuthenticationButton />
         </div>
       </div>
       <Routes>
@@ -89,10 +94,8 @@ export default function App() {
           <Route path="/tasks/:taskId" element={<TaskDetail tasks={tasksFromServer} />} />
         </Route>
         <Route path="/add" element={<AddTask onTaskAdded={fetchData} />} />
-        <Route
-          path="*"
-          element={<h1>404 Not Found</h1>}
-        />
+        <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </div>
   )
