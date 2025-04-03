@@ -5,6 +5,7 @@ import AddTask from './components/AddTask';
 import TaskDetail from './components/TaskDetail';
 import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
 import LoginButton from './components/LoginButton';
+import LogoutButton from './components/LogoutButton';
 
 export default function App() {
   const [tasksFromServer, setTasksFromServer] = useState([]);
@@ -74,7 +75,10 @@ export default function App() {
           <NavLink to="/tasks" className={({ isActive }) => isActive ? 'active' : ''}>Tasks</NavLink>
           <NavLink to="/add" className={({ isActive }) => isActive ? 'active' : ''}>Add Task</NavLink>
         </nav>
-        <LoginButton />
+        <div className="authButtons">
+          <LoginButton />
+          <LogoutButton />
+        </div>
       </div>
       <Routes>
         <Route path="/" element={<Header myAppName={appName} />} />
