@@ -3,8 +3,14 @@ const router = express.Router();
 const axios = require('axios');
 const { addToDB, findAll, findById, findOne, deleteTask } = require('../db');
 const { ObjectId } = require('mongodb');
+const { auth } = require('express-oauth2-jwt-bearer');
 
-router.post("/", async (req, res) => {
+const checkJwt = auth({
+    audience: process.env.AUTH0_AUDIENCE,
+    issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}/`,
+});
+
+router.post("/", auth, async (req, res) => {
     try{
         console.log("req.body", req.body);
         await addToDB(req.body);

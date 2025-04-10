@@ -1,7 +1,9 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AddTask({ onTaskAdded }) {
+    useAuth0
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const [error, setError] = useState(null);
@@ -32,6 +34,9 @@ export default function AddTask({ onTaskAdded }) {
             });
 
             if (!response.ok) {
+                if (response.status === 401) {
+                    throw new Error("Invalid data");
+                }
                 throw new Error(`Failed to add task: ${response.status}`);
             }
 
