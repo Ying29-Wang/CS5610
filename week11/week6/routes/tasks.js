@@ -10,7 +10,7 @@ const checkJwt = auth({
     issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}/`,
 });
 
-router.post("/", auth, async (req, res) => {
+router.post("/", checkJwt, async (req, res) => {
     try{
         console.log("req.body", req.body);
         await addToDB(req.body);
