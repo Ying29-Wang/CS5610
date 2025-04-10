@@ -8,7 +8,7 @@ export default function LoginButton() {
         loginWithRedirect();
     }
     return (
-        <button onClick={loginHandler}>
+        <button onClick={loginHandler} className="auth-button">
             Login
         </button>
     )

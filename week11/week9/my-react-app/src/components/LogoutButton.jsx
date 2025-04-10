@@ -10,6 +10,5 @@ export default function LogoutButton() {
             }
         });
     }
-    return <button onClick={logoutHandler}>Logout</button>
-    
+    return <button onClick={logoutHandler} className="auth-button">Logout</button>
 }
