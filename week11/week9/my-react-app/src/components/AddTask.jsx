@@ -1,7 +1,10 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function AddTask({ onTaskAdded }) {
+    const { getAccessTokenSilently } = useAuth0();
     const [title, setTitle] = useState("");
     const [date, setDate] = useState("");
     const [error, setError] = useState(null);
@@ -17,6 +20,7 @@ export default function AddTask({ onTaskAdded }) {
         console.log(newTask);
 
         try {
+            const token = await getAccessTokenSilently();
             // First check if server is available
             const serverCheck = await fetch("http://localhost:3000/api/tasks");
             if (!serverCheck.ok) {
@@ -27,11 +31,15 @@ export default function AddTask({ onTaskAdded }) {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(newTask),
             });
 
             if (!response.ok) {
+                if (response.status === 401) {
+                    throw new Error("Invalid data");
+                }
                 throw new Error(`Failed to add task: ${response.status}`);
             }
 

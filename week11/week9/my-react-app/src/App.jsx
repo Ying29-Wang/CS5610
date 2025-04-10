@@ -10,6 +10,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import AuthenticationButton from './components/AuthenticationButton';
 import Profile from './components/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
+import Nav from './components/Nav';
 
 export default function App() {
   const [tasksFromServer, setTasksFromServer] = useState([]);
@@ -74,26 +75,13 @@ export default function App() {
   return (
     isLoading ? <div>Loading...</div> :
     <div className="appContainer">
-      <div className="navContainer">
-        <nav>
-          <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink>
-          <NavLink to="/tasks" className={({ isActive }) => isActive ? 'active' : ''}>Tasks</NavLink>
-          <NavLink to="/add" className={({ isActive }) => isActive ? 'active' : ''}>Add Task</NavLink>
-          <NavLink to="/profile" className={({ isActive }) => isActive ? 'active' : ''}>Profile</NavLink>
-        </nav>
-        <div className="authButtons">
-          <AuthenticationButton />
-        </div>
-      </div>
+      <Nav />
+      <Header myAppName={appName} />
       <Routes>
-        <Route path="/" element={<Header myAppName={appName} />} />
-        <Route
-          path="/tasks"
-          element={<TasksList tasks={tasksFromServer} isLoading={isLoading} onTaskDeleted={fetchData} />}
-        >
-          <Route path="/tasks/:taskId" element={<TaskDetail tasks={tasksFromServer} />} />
-        </Route>
+        <Route path="/" element={<TasksList tasks={tasksFromServer} isLoading={isLoading} onTaskDeleted={fetchData} />} />
+        <Route path="/tasks" element={<TasksList tasks={tasksFromServer} isLoading={isLoading} onTaskDeleted={fetchData} />} />
         <Route path="/add" element={<AddTask onTaskAdded={fetchData} />} />
+        <Route path="/tasks/:taskId" element={<TaskDetail tasks={tasksFromServer} />} />
         <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
